@@ -1,4 +1,5 @@
 ﻿using SampleDAL.DbModels;
+using SampleDAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace SampleBLL.Interfaces
     public interface IBooksService
     {
         Task<IEnumerable<Book>> GetAllAsync();
-
+        //Task<IEnumerable<Book>> GetAllBooksByStoredProcedure(VMBooksSP vmBookSp);
     }
 }

@@ -17,7 +17,7 @@ namespace SampleDAL.ViewModels
 
         public Response() : base() { }
 
-        public Response(string message, bool IsSuccess = true) : base(message,IsSuccess)
+        public Response(string message, bool IsSuccess = true) : base(message, IsSuccess)
         {
             Message = message;
             Success = IsSuccess;
@@ -90,7 +90,15 @@ namespace SampleDAL.ViewModels
     public class ResponseError
     {
         public long errorCode { get; set; }
-        public string errorMessage { get; set; }
+        public string? errorMessage { get; set; }
+
+
+
+        public override string ToString()
+        {
+            return JsonSerializer.Serialize(this);
+        }
+
     }
 
     public enum MESSAGE : int

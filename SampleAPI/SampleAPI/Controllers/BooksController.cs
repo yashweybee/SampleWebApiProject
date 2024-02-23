@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SampleBLL.Interfaces;
 using SampleDAL.Repository;
 using SampleDAL.ViewModels;
+using Serilog;
 
 namespace SampleAPI.Controllers
 {
@@ -28,16 +29,20 @@ namespace SampleAPI.Controllers
         public async Task<ActionResult<IEnumerable<VMBook>>> GetBooks()
         {
             var books = await _booksService.GetAllAsync();
+
+            Log.Information("Books data : {@books}", books);
+            throw new Exception("Custom exception by Yash");
             return Ok(books);
         }
 
         //[HttpGet(Name = "Pagination, Sorting & Searching")]
-        //public async Task<ActionResult<IEnumerable<VMBook>>> GetBooksBySp()
+        //public async Task<ActionResult<IEnumerable<VMBook>>> GetBooksBySp(VMBooksSP vMBooksSP)
         //{
-        //    var books = await _booksService.From
 
-        //    return Ok(books);
+        //    return Ok();
+
         //}
+
 
     }
 }

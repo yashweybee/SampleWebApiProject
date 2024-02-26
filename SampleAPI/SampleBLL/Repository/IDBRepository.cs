@@ -18,5 +18,6 @@ namespace SampleDAL.Repository
         Task UpdateAsync(TEntity entity); // New method for updating entities
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
+
     }
 }

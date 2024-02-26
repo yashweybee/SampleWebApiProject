@@ -62,11 +62,6 @@ if (app.Environment.IsDevelopment())
 }
 
 
-//var logger = app.Services.GetRequiredService<ILogger>();
-//app.ConfigureExceptionHandler(logger);
-//app.UseMiddleware<ExceptionMiddlewareExtensions>();
-
-
 //Exception middelware
 app.ConfigureExceptionMiddelware();
 

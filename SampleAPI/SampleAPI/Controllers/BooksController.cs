@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SampleBLL.Interfaces;
+using SampleDAL.DbModels;
 using SampleDAL.Repository;
 using SampleDAL.ViewModels;
 using Serilog;
@@ -24,25 +25,21 @@ namespace SampleAPI.Controllers
         /// <summary>
         /// Get all the data form Books table
         /// </summary>
-        /// <returns>Returns json object of all books data</returns>
+        /// <returns>Returns json object of all books data (Response Model)</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VMBook>>> GetBooks()
         {
             var books = await _booksService.GetAllAsync();
 
+            if (books == null)
+            {
+                return NotFound(new Response<IEnumerable<VMBook>>(MESSAGE.DATA_NOT_FOUND, false));
+            }
+
+            //throw new Exception("Custom exception : Test");
+
             Log.Information("\n \n Books data : {@books}", books);
-            //throw new Exception("Custom exception by Yash");
-            return Ok(books);
+            return Ok(new Response<IEnumerable<Book>>(books, true, MESSAGE.LOADED));
         }
-
-        //[HttpGet(Name = "Pagination, Sorting & Searching")]
-        //public async Task<ActionResult<IEnumerable<VMBook>>> GetBooksBySp(VMBooksSP vMBooksSP)
-        //{
-
-        //    return Ok();
-
-        //}
-
-
     }
 }

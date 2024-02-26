@@ -69,7 +69,7 @@ namespace SampleAPI.Controllers
             // Map CategoryViewModel to Category
             var category = _mapper.Map<Category>(vmCategory);
             var createdCategory = await _categoryService.AddAsync(category);
-            return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.CategoryId }, createdCategory);
+            return CreatedAtAction(nameof(GetCategoryById), new { id = createdCategory.CategoryId }, new Response<VMCategory>(vmCategory, true, MESSAGE.SAVED));
         }
 
 
@@ -93,7 +93,8 @@ namespace SampleAPI.Controllers
 
             await _categoryService.UpdateAsync(category);
 
-            return NoContent();
+
+            return Ok(new Response<VMCategory>(vmCategory, true, MESSAGE.UPDATED));
         }
 
 
@@ -111,12 +112,13 @@ namespace SampleAPI.Controllers
             var category = await _categoryService.GetByIdAsync(id);
             if (category == null)
             {
-                return NotFound();
+                return NotFound(new Response<object>(MESSAGE.DATA_NOT_FOUND, false));
+                //return NotFound();
             }
 
             _categoryService.Remove(category);
 
-            return NoContent();
+            return CreatedAtAction(nameof(GetCategoryById), new { id = category.CategoryId }, new Response<Category>(category, true, MESSAGE.DELETED));
         }
     }
 }

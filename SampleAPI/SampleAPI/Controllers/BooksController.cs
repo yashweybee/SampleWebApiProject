@@ -30,8 +30,8 @@ namespace SampleAPI.Controllers
         {
             var books = await _booksService.GetAllAsync();
 
-            Log.Information("Books data : {@books}", books);
-            throw new Exception("Custom exception by Yash");
+            Log.Information("\n \n Books data : {@books}", books);
+            //throw new Exception("Custom exception by Yash");
             return Ok(books);
         }
 

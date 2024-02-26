@@ -9,6 +9,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SampleCore.Middlewares
 {
     public class ExceptionMiddelware : IMiddleware
@@ -27,6 +28,7 @@ namespace SampleCore.Middlewares
             }
             catch (Exception ex)
             {
+
                 _logger.LogError($"Somthing went wrong");
                 await HandleException(context, ex);
             }

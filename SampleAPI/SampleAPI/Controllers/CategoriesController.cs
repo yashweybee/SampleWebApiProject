@@ -23,12 +23,19 @@ namespace SampleAPI.Controllers
         /// <summary>
         /// Get list of all categories from db
         /// </summary>
-        /// <returns>List of all categories</returns>
+        /// <returns>List of all categories (Response class)</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<VMCategory>>> GetCategories()
         {
             var categories = await _categoryService.GetAllAsync();
-            return Ok(categories);
+
+            //categories = null;
+            if (categories == null)
+            {
+                return NotFound(new Response<IEnumerable<VMCategory>>(MESSAGE.DATA_NOT_FOUND, false));
+            }
+
+            return Ok(new Response<IEnumerable<Category>>(categories, true, MESSAGE.LOADED));
         }
 
         /// <summary>
@@ -42,9 +49,12 @@ namespace SampleAPI.Controllers
             var category = await _categoryService.GetByIdAsync(id);
             if (category == null)
             {
-                return NotFound();
+                return NotFound(new Response<IEnumerable<VMCategory>>(MESSAGE.DATA_NOT_FOUND, false));
+                //return NotFound();
             }
-            return Ok(category);
+
+            return Ok(new Response<Category>(category, true, MESSAGE.LOADED));
+            //return Ok(category);
         }
 
         /// <summary>
@@ -85,7 +95,6 @@ namespace SampleAPI.Controllers
 
             return NoContent();
         }
-
 
 
         /// <summary>

@@ -29,7 +29,7 @@ namespace SampleDAL.ViewModels
         public bool Success { get; set; } = true;
         public T? Data { get; set; }
         public string? Message { get; set; }
-        public ResponseError error { get; set; }
+        public ResponseError? error { get; set; }
 
         public override string ToString()
         {

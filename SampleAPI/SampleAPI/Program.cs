@@ -34,6 +34,8 @@ Log.Logger = new LoggerConfiguration()
 
 .MinimumLevel.Information()
 .WriteTo.File("SampleCore/Logs/BooksFetchData.txt")
+//.MinimumLevel.Debug()
+//.WriteTo.File("SampleCore/Logs/BooksDebugs.txt")
 .CreateLogger();
 
 
